@@ -10,9 +10,14 @@
         <acl name="RPC" />
         <object name="resource.admin" />
         <object name="user.mabako" />
+        <object name="user.CourtezBoi" />
+        <object name="user.illone" />
+        <object name="user.Robwiin" />
     </group>
     <group name="Moderator">
         <acl name="Moderator" />
+        <object name="user.obliterator789" />
+        <object name="user.Najkwiin" />
     </group>
     <group name="Console">
         <acl name="Admin" />
@@ -39,6 +44,8 @@
     <group name="Developer">
         <acl name="Developer" />
         <object name="user.mabako" />
+        <object name="user.CourtezBoi" />
+        <object name="user.illone" />
     </group>
     <acl name="Default">
         <right name="general.ModifyOtherObjects" access="false" />
