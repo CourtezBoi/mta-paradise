@@ -1,0 +1,5 @@
+<meta>
+  <info author="Callum" version="1.1" name="PayNSpray" decription="Pay 'n' Spray" type="script" /> 
+	<script src="pns.lua" type="server" />
+	<map src="pns.map" />
+</meta>
