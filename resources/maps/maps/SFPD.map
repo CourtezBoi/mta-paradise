@@ -1,0 +1,8 @@
+<map edf:definitions="editor_main">
+    <object id="object (fenceshit3) (1)" doublesided="false" model="983" interior="10" dimension="0" posX="239.72787475586" posY="112.84625244141" posZ="1004.4199829102" rotX="0" rotY="0" rotZ="0" />
+    <object id="object (kmb_lockeddoor) (1)" doublesided="false" model="2949" interior="10" dimension="0" posX="239.2943572998" posY="115.57566833496" posZ="1009.21875" rotX="0" rotY="0" rotZ="0" />
+    <object id="object (fenceshit3) (2)" doublesided="false" model="983" interior="10" dimension="0" posX="253.29051208496" posY="117.39488220215" posZ="1004.4299926758" rotX="0" rotY="0" rotZ="359.5" />
+    <object id="object (gatehouse2_SFSe) (1)" doublesided="false" model="10832" interior="0" dimension="0" posX="-1628.9494628906" posY="702.99517822266" posZ="49.57544708252" rotX="0" rotY="0" rotZ="89.25" />
+    <object id="object (chinaTgarageDoor) (1)" doublesided="false" model="2957" interior="0" dimension="0" posX="-1620.3374023438" posY="688.26171875" posZ="7.8072853088379" rotX="0" rotY="0" rotZ="0" />
+    <object id="object (gatehouse1_SFSe) (1)" doublesided="false" model="10829" interior="0" dimension="0" posX="-2702.2907714844" posY="641.48028564453" posZ="65.09375" rotX="0" rotY="0" rotZ="270" />
+</map>

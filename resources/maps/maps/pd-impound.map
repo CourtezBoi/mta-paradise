@@ -1,0 +1,13 @@
+<map edf:definitions="editor_main">
+    <object id="object (tall_fence) (1)" doublesided="false" model="974" interior="0" dimension="0" posX="-1870.3095703125" posY="-124.80194854736" posZ="13.676177978516" rotX="0" rotY="0" rotZ="348.5" />
+    <object id="object (tall_fence) (3)" doublesided="false" model="974" interior="0" dimension="0" posX="-1876.7634277344" posY="-123.23152923584" posZ="13.682857513428" rotX="0" rotY="0" rotZ="343.99731445313" />
+    <object id="object (tall_fence) (4)" doublesided="false" model="974" interior="0" dimension="0" posX="-1883.0712890625" posY="-121.135597229" posZ="13.682857513428" rotX="0" rotY="0" rotZ="339.24291992188" />
+    <object id="object (tall_fence) (5)" doublesided="false" model="974" interior="0" dimension="0" posX="-1863.7396240234" posY="-125.78333282471" posZ="13.676177978516" rotX="0" rotY="0" rotZ="354.49731445313" />
+    <object id="object (tall_fence) (6)" doublesided="false" model="974" interior="0" dimension="0" posX="-1857.1798095703" posY="-126.17269134521" posZ="13.676177978516" rotX="0" rotY="0" rotZ="358.49584960938" />
+    <object id="object (tall_fence) (7)" doublesided="false" model="974" interior="0" dimension="0" posX="-1850.5498046875" posY="-126.38028717041" posZ="13.676177978516" rotX="0" rotY="0" rotZ="357.99487304688" />
+    <object id="object (tall_fence) (8)" doublesided="false" model="974" interior="0" dimension="0" posX="-1847.1403808594" posY="-129.82528686523" posZ="13.676177978516" rotX="0" rotY="0" rotZ="270.23950195313" />
+    <object id="object (tall_fence) (9)" doublesided="false" model="974" interior="0" dimension="0" posX="-1847.0861816406" posY="-136.45520019531" posZ="13.676177978516" rotX="0" rotY="0" rotZ="270.48620605469" />
+    <object id="object (tall_fence) (10)" doublesided="false" model="974" interior="0" dimension="0" posX="-1846.9616699219" posY="-143.04341125488" posZ="13.682857513428" rotX="0" rotY="0" rotZ="271.2333984375" />
+    <object id="object (hrborbuild_SFN01) (1)" doublesided="false" model="9244" interior="0" dimension="0" posX="-1857.4694824219" posY="-154.6748046875" posZ="15" rotX="0" rotY="180" rotZ="0" />
+    <object id="object (hrborbuild_SFN01) (2)" doublesided="false" model="9244" interior="0" dimension="0" posX="-1857.6102294922" posY="-154.6748046875" posZ="9" rotX="0" rotY="179.99450683594" rotZ="0" />
+</map>
