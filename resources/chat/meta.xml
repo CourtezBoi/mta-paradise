@@ -16,6 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <meta>
 	<script src="chat.lua"/>
+	<script src="report.lua"/>
 	<!-- Sends a local message appearing as if the player typed /me <message>.
 		parameters:
 			(player) sender - player from whom the message is sent from.
