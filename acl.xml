@@ -18,6 +18,7 @@
         <acl name="Moderator" />
         <object name="user.obliterator789" />
         <object name="user.Najkwiin" />
+        <object name="user.starewars" />
     </group>
     <group name="Console">
         <acl name="Admin" />
@@ -39,7 +40,6 @@
     </group>
     <group name="kickban">
         <acl name="kickban" />
-        <object name="resource.parasite" />
         <object name="resource.players" />
     </group>
     <group name="Developer">
@@ -47,6 +47,7 @@
         <object name="user.mabako" />
         <object name="user.CourtezBoi" />
         <object name="user.illone" />
+        <object name="user.Sirius" />
     </group>
     <acl name="Default">
         <right name="general.ModifyOtherObjects" access="false" />
@@ -311,7 +312,5 @@
         <right name="function.kickPlayer" access="true" />
         <right name="function.addBan" access="true" />
         <right name="function.banPlayer" access="true" />
-        <right name="function.getClientIP" access="true" />
-        <right name="function.getPlayerSerial" access="true" />
     </acl>
 </acl>
