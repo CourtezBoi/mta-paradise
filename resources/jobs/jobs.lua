@@ -24,7 +24,7 @@ local function createOurPed( )
 	
 	ped = createPed( 211, 359.7, 173.65, 1008.4 )
 	setPedRotation( ped, 270 )
-	setElementDimension( ped, 1 )
+	setElementDimension( ped, 45 )
 	setElementInterior( ped, 3 )
 end
 

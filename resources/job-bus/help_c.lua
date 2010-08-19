@@ -20,10 +20,10 @@ local blip, sphere
 addEvent( getResourceName( resource ) .. ":introduce", true )
 addEventHandler( getResourceName( resource ) .. ":introduce", root,
 	function( )
-		exports.gui:hint( "Your new Job: Bus Driver", "It's easy, just follow the route until you reach your last destination. To Start, grab a Bus from Linden Station, there's a marker on your radar.", 1 )
+		exports.gui:hint( "Your new Job: Bus Driver", "It's easy, just follow the route until you reach your last destination. To Start, grab a Bus from Canny Station, there's a marker on your radar.", 1 )
 		
 		if not blip and not sphere then
-			sphere = createColSphere( 2819, 1317, 10, 50 )
+			sphere = createColSphere( -2630.39, 1359.61, 7.11, 50 )
 			blip = createBlipAttachedTo( sphere, 0, 3, 0, 255, 0, 127 )
 			
 			addEventHandler( "onClientColShapeHit", sphere,
