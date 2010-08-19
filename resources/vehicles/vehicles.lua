@@ -159,7 +159,9 @@ addEventHandler( "onResourceStart", resourceRoot,
 		setTimer(
 			function( )
 				for vehicle, data in pairs( vehicles ) do
-					if data.engineState and data.fuel and not isVehicleEmpty( vehicle ) and doesVehicleHaveEngine( vehicle ) and doesVehicleHaveFuel( vehicle ) then
+					if not isElement( vehicle ) or getElementType( vehicle ) ~= "vehicle" then
+						vehicles[ vehicle ] = nil
+					elseif data.engineState and data.fuel and not isVehicleEmpty( vehicle ) and doesVehicleHaveEngine( vehicle ) and doesVehicleHaveFuel( vehicle ) then
 						local vx, vy, vz = getElementVelocity( vehicle )
 						local speed = math.sqrt( vx * vx + vy * vy )
 						local loss = ( speed > 0.65 and 2 * speed or speed ) * 0.1 + 0.005
@@ -243,7 +245,7 @@ function create( player, vehicle )
 				
 				-- tables for ID -> vehicle and vehicle -> data
 				vehicleIDs[ vehicleID ] = newVehicle
-				vehicles[ newVehicle ] = { vehicleID = vehicleID, respawnInterior = interior, respawnDimension = dimension, characterID = characterID, engineState = false, tintedWindows = false }
+				vehicles[ newVehicle ] = { vehicleID = vehicleID, respawnInterior = interior, respawnDimension = dimension, characterID = characterID, engineState = false, tintedWindows = false, fuel = 100 }
 				
 				-- some properties
 				setVehicleColor( newVehicle, color1, color2, color1, color2 ) -- most vehicles don't use second/third color anyway
