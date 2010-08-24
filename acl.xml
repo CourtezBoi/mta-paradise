@@ -13,6 +13,9 @@
         <object name="user.CourtezBoi" />
         <object name="user.illone" />
         <object name="user.Robwiin" />
+        <object name="user.Sirius" />
+        <object name="user.Wesley" />
+        <object name="user.sun" />
     </group>
     <group name="Moderator">
         <acl name="Moderator" />
@@ -48,6 +51,7 @@
         <object name="user.CourtezBoi" />
         <object name="user.illone" />
         <object name="user.Sirius" />
+        <object name="user.sun" />
     </group>
     <acl name="Default">
         <right name="general.ModifyOtherObjects" access="false" />
