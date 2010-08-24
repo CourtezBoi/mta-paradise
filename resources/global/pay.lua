@@ -1,5 +1,4 @@
-
-        function pay( player, commandName, otherPlayer, amount )
+function pay( player, commandName, otherPlayer, amount )
                 local amount = tonumber( amount )
                 if otherPlayer and amount and math.ceil( amount ) == amount and amount > 0 then
                         local other, name = exports.players:getFromName( player, otherPlayer )
@@ -23,4 +22,3 @@
                         outputChatBox( "Syntax: /" .. commandName .. " [player] [amount]", player, 255, 255, 255 )
                 end
         end
-addCommandHandler( "pay", pay)
