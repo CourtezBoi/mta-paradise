@@ -32,8 +32,9 @@ local groups = {
 }
 
 local function updateNametagColor( player )
-	local nametagColor = { 255, 255, 255, priority = 0 }
-	if p[ player ] then
+	local nametagColor = { 127, 127, 127, priority = 0 }
+	if p[ player ] and isLoggedIn( player ) then
+		nametagColor = { 255, 255, 255, priority = 0 }
 		for key, value in ipairs( groups ) do
 			if isObjectInACLGroup( "user." .. p[ player ].username, aclGetGroup( value.aclGroup ) ) and value.nametagColor then
 				if value.priority > nametagColor.priority then
@@ -570,7 +571,15 @@ local function savePlayer( player )
 		if isLoggedIn( player ) then
 			-- save character since it's logged in
 			local x, y, z = getElementPosition( player )
-			exports.sql:query_free( "UPDATE characters SET x = " .. x .. ", y = " .. y .. ", z = " .. z .. ", dimension = " .. getElementDimension( player ) .. ", interior = " .. getElementInterior( player ) .. ", rotation = " .. getPedRotation( player ) .. ", health = " .. math.floor( getElementHealth( player ) ) .. ", armor = " .. math.floor( getPedArmor( player ) ) .. ", weapons = " .. getWeaponString( player ) .. ", lastLogin = NOW() WHERE characterID = " .. tonumber( getCharacterID( player ) ) )
+			local dimension = getElementDimension( player )
+			local interior = getElementInterior( player )
+			
+			if hasObjectPermissionTo( player, "command.spectate", false ) and type( getElementData( player, "collisionless" ) ) == "table" then
+				-- spectating
+				x, y, z, dimension, interior = unpack( getElementData( player, "collisionless" ) )
+			end
+			
+			exports.sql:query_free( "UPDATE characters SET x = " .. x .. ", y = " .. y .. ", z = " .. z .. ", dimension = " .. dimension .. ", interior = " .. interior .. ", rotation = " .. getPedRotation( player ) .. ", health = " .. math.floor( getElementHealth( player ) ) .. ", armor = " .. math.floor( getPedArmor( player ) ) .. ", weapons = " .. getWeaponString( player ) .. ", lastLogin = NOW() WHERE characterID = " .. tonumber( getCharacterID( player ) ) )
 		end
 	end
 end
