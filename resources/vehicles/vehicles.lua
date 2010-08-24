@@ -318,6 +318,23 @@ addCommandHandler( { "repairvehicle", "fixvehicle" },
 	end,
 	true
 )
+addCommandHandler( { "brakes", "handbrake" },
+function ( player )
+	if isPlayerInVehicle ( player ) then
+		local playerVehicle = getPlayerOccupiedVehicle ( player )
+		local currentFreezeStatus = isVehicleFrozen ( playerVehicle )
+		local newFreezeStatus = not currentFreezeStatus
+		if isVehicleOnGround ( playerVehicle ) then
+			setVehicleFrozen ( playerVehicle, newFreezeStatus )
+		else
+			outputChatBox( "Your vehicle must be on the ground.", player, 255, 0, 0 )
+		end
+			
+	else
+		outputChatBox( "You are not in a vehicle.", player, 255, 0, 0 )
+	end
+end
+)
 
 addCommandHandler( { "repairvehicles", "fixvehicles" },
 	function( player, commandName )
@@ -520,6 +537,34 @@ addCommandHandler( { "vehicleid", "thisvehicle" },
 			outputChatBox( "You are not in any vehicle.", player, 255, 0, 0 )
 		end
 	end
+)
+
+addCommandHandler( "aflip",
+	function( player, commandName )
+		local vehicle = getPedOccupiedVehicle( player )
+		local vehicleID = vehicles[ vehicle ] and vehicles[ vehicle ].vehicleID
+		if vehicleID then
+			local vehicle = vehicleIDs[ vehicleID ]
+			if vehicle then
+				local x, y, z, rz = getPositionInFrontOf( player )
+				setElementPosition( vehicle, x, y, z )
+				setElementDimension( vehicle, getElementDimension( player ) )
+				setElementInterior( vehicle, getElementInterior( player ) )
+				setVehicleRotation( vehicle, 0, 0, rz )
+				outputChatBox( "Vehicle Flipped!", player, 0, 255, 153 )
+				
+				-- save the vehicle delayed since it might fall down/position might be adjusted to ground position
+				if vehicleID > 0 then
+					setTimer( saveVehicle, 2000, 1, vehicle )
+				end
+			else
+				outputChatBox( "You are not in a vehicle", player, 255, 0, 0 )
+			end
+		else
+			outputChatBox( "Syntax: /" .. commandName .. " [id]", player, 255, 255, 255 )
+		end
+	end,
+	true
 )
 
 addCommandHandler( { "oldvehicleid", "oldvehicle" },
