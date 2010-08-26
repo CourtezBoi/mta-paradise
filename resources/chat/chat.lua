@@ -57,6 +57,20 @@ local function getPlayersInRange( from, range )
 			end
 		end
 	end
+	if getElementType( from ) == "player" then
+		local vehicle = getPedOccupiedVehicle( from )
+		if vehicle then
+			local passengers = getVehicleMaxPassengers( vehicle )
+			if type( passengers ) == 'number' then
+				for seat = 0, passengers do
+					local value = getVehicleOccupant( vehicle, seat )
+					if value then
+						t[ value ] = 0
+					end
+				end
+			end
+		end
+	end
 	return t
 end
 
@@ -206,24 +220,79 @@ addCommandHandler( { "b", "LocalOOC" },
 addCommandHandler( { "o", "GlobalOOC" },
 	function( thePlayer, commandName, ... )
 		if exports.players:isLoggedIn( thePlayer ) then
-			local message = table.concat( { ... }, " " )
-			if #message > 0 then
-				outputChatBox( "(( " .. getPlayerName( thePlayer ) ..  ": " .. message .. " ))", root, 196, 255, 255 )
-				exports.server:message( "%C04[" .. exports.players:getID( thePlayer ) .. "]%C12  (( " .. getPlayerName( thePlayer ) .. ": " .. message .. " ))%C" )
+			if getElementData( root, "ooc" ) == 1 or hasObjectPermissionTo( thePlayer, "command.toggleooc", false ) then
+				local message = table.concat( { ... }, " " )
+				if #message > 0 then
+					outputChatBox( "(( " .. getPlayerName( thePlayer ) ..  ": " .. message .. " ))", root, 196, 255, 255 )
+					exports.server:message( "%C04[" .. exports.players:getID( thePlayer ) .. "]%C12  (( " .. getPlayerName( thePlayer ) .. ": " .. message .. " ))%C" )
+				else
+					outputChatBox( "Syntax: /" .. commandName .. " [local ooc text]", thePlayer, 255, 255, 255 )
+				end
 			else
-				outputChatBox( "Syntax: /" .. commandName .. " [local ooc text]", thePlayer, 255, 255, 255 )
+				outputChatBox( "Global OOC is currently disabled.", thePlayer, 255, 0, 0 )
 			end
 		end
 	end
 )
 
+-- /toggleooc
+addCommandHandler( { "toggleooc", "disableooc", "enableooc", "togooc" },
+	function( player, commandName, silent )
+		silent = silent == "silent"
+		if getElementData( root, "ooc" ) == 0 then
+			if commandName == "disableooc" then
+				outputChatBox( "Global OOC is already disabled.", player, 255, 0, 0 )
+			else
+				setElementData( root, "ooc", 1, false )
+				for key, value in ipairs( getElementsByType( "player" ) ) do
+					if hasObjectPermissionTo( value, "command.toggleooc", false ) then
+						outputChatBox( "*** " .. getPlayerName( player ):gsub( "_", " " ) .. " enabled Global OOC. ***", value, 0, 255, 153 )
+					elseif not silent then
+						outputChatBox( "*** Global OOC has been enabled. ***", value, 0, 255, 153 )
+					end
+				end
+			end
+		else
+			if commandName == "enableooc" then
+				outputChatBox( "Global OOC is already enabled.", player, 255, 0, 0 )
+			else
+				setElementData( root, "ooc", 0, false )
+				for key, value in ipairs( getElementsByType( "player" ) ) do
+					if hasObjectPermissionTo( value, "command.toggleooc", false ) then
+						outputChatBox( "*** " .. getPlayerName( player ):gsub( "_", " " ) .. " disabled Global OOC. ***", value, 0, 255, 153 )
+					elseif not silent then
+						outputChatBox( "*** Global OOC has been disabled. ***", value, 0, 255, 153 )
+					end
+				end
+			end
+		end
+	end,
+	true
+)
+
+addEventHandler( "onResourceStart", resourceRoot,
+	function( )
+		if getElementData( root, "ooc" ) ~= 0 and getElementData( root, "ooc" ) ~= 1 then
+			setElementData( root, "ooc", 1, false )
+		end
+	end
+)
+
+-- /announce
 addCommandHandler( { "announce", "ann" },
 	function( thePlayer, commandName, ... )
 		if exports.players:isLoggedIn( thePlayer ) then
 			local message = table.concat( { ... }, " " )
 			if #message > 0 then
-				outputChatBox( "*** " .. message .. " ***", root, 0, 255, 153 )
-				exports.server:message( "%C03[" .. exports.players:getID( thePlayer ) .. "] Announcement by " .. getPlayerName( thePlayer ) .. ": " .. message .. "%C" )
+				for key, value in ipairs( getElementsByType( "player" ) ) do
+					if hasObjectPermissionTo( value, "command.announce", false ) then
+						outputChatBox( "*** " .. getPlayerName( thePlayer ):gsub( "_", " " ) .. ": " .. message .. " ***", value, 0, 255, 153 )
+					elseif not silent then
+						outputChatBox( "*** " .. message .. " ***", value, 0, 255, 153 )
+					end
+				end
+				
+				exports.server:message( "%C03[" .. exports.players:getID( thePlayer ) .. "] Announcement by " .. getPlayerName( thePlayer ):gsub( "_", " " ) .. ": " .. message .. "%C" )
 			else
 				outputChatBox( "Syntax: /" .. commandName .. " [text]", thePlayer, 255, 255, 255 )
 			end
@@ -232,6 +301,7 @@ addCommandHandler( { "announce", "ann" },
 	true
 )
 
+-- /a
 addCommandHandler( { "adminchat", "a" },
 	function( thePlayer, commandName, ... )
 		if exports.players:isLoggedIn( thePlayer ) then
@@ -256,6 +326,7 @@ addCommandHandler( { "adminchat", "a" },
 	true
 )
 
+-- /m
 addCommandHandler( { "modchat", "m" },
 	function( thePlayer, commandName, ... )
 		if exports.players:isLoggedIn( thePlayer ) then
@@ -299,14 +370,19 @@ addCommandHandler( { "ad", "advertisement" },
 )
 
 -- /sr SAN radio chat
-addCommandHandler( { "sr", "san" },
+addCommandHandler( { "news", "n", "sr", "san" },
 	function( thePlayer, commandName, ... )
 		if exports.players:isLoggedIn( thePlayer ) then
-			local message = table.concat( { ... }, " " )
-			if #message > 0 then
-				outputChatBox( "[SAN] " .. getPlayerName( thePlayer ) ..  " says: " .. message, root, 62, 184, 255 )
+			local inNews, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 3 )
+			if inNews and factionTag then
+				local message = table.concat( { ... }, " " )
+				if #message > 0 then
+					outputChatBox( "[" .. tostring( factionTag ) .. "] " .. getPlayerName( thePlayer ) ..  " says: " .. message, root, 62, 184, 255 )
+				else
+					outputChatBox( "Syntax: /" .. commandName .. " [radio message]", thePlayer, 255, 255, 255 )
+				end
 			else
-				outputChatBox( "Syntax: /" .. commandName .. " [radio message]", thePlayer, 255, 255, 255 )
+				outputChatBox( "(( You are not in a news faction. ))", thePlayer, 255, 0, 0 )
 			end
 		end
 	end

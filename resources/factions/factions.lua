@@ -167,8 +167,21 @@ function isPlayerInFaction( player, faction, leader )
 	return factions[ faction ] and p[ player ] and p[ player ].rfactions and p[ player ].rfactions[ faction ] and ( type( leader ) ~= "number" or p[ player ].rfactions[ faction ].leader >= leader ) and true or false
 end
 
-function isPlayerInFactionType( player, type )
-	return factionTypes[ type ] and p[ player ] and p[ player ].types and p[ player ].types[ factionTypes[ type ] ] or false
+function isPlayerInFactionType( player, type_ )
+	type_ = factionTypes[ type_ ] or type_
+	if not type_ then
+		return false
+	end
+	
+	local f = p[ player ] and p[ player ].factions
+	if f then
+		for _, value in pairs( f ) do
+			if factions[ value ] and factions[ value ].type == type_ then
+				return true, value, factions[ value ].name, factions[ value ].tag
+			end
+		end
+	end
+	return false
 end
 
 --
@@ -409,7 +422,7 @@ addEventHandler( "faction:kick", root,
 					return
 				end
 				
-				if exports.sql:query_affected_rows( "DELETE cf FROM character_to_factions cf LEFT JOIN characters c ON c.characterID = cf.characterID WHERE cf.factionID = 1 AND c.characterName = '%s' AND cf.factionLeader < " .. p[ source ].rfactions[ faction ].leader, name ) == 1 then
+				if exports.sql:query_affected_rows( "DELETE cf FROM character_to_factions cf LEFT JOIN characters c ON c.characterID = cf.characterID WHERE cf.factionID = " .. faction .. " AND c.characterName = '%s' AND cf.factionLeader < " .. p[ source ].rfactions[ faction ].leader, name ) == 1 then
 					sendMessageToFaction( faction, "(( " .. factions[ faction ].tag .. " - " .. getPlayerName( source ):gsub( "_", " " ) .. " kicked " .. name .. ". ))", 255, 127, 0 )
 					if player then
 						-- remove him from the tables
