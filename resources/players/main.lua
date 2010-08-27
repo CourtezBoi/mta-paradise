@@ -836,6 +836,18 @@ end
 addEventHandler( "onPlayerSpawn", root,
 	function( )
 		updateNametag( source )
+		setPlayerBlurLevel ( source, 0 )
+		setPlayerStat ( source, 69, 999 )
+		setPlayerStat ( source, 70, 999 )
+		setPlayerStat ( source, 71, 999 )
+		setPlayerStat ( source, 72, 999 )
+		setPlayerStat ( source, 73, 999 )
+		setPlayerStat ( source, 74, 999 )
+		setPlayerStat ( source, 75, 999 )
+		setPlayerStat ( source, 76, 999 )
+		setPlayerStat ( source, 77, 999 )
+		setPlayerStat ( source, 78, 999 )
+		setPlayerStat ( source, 79, 999 )
 	end
 )
 

@@ -45,7 +45,12 @@
         <acl name="Developer" />
         <object name="user.mabako" />
         <object name="user.CourtezBoi" />
+<<<<<<< HEAD
+=======
+        <object name="user.illone" />
+        <object name="user.Sirius" />
         <object name="user.sun" />
+>>>>>>> 27f3b31ea3be91271a32aa770ab948803a82d8b8
     </group>
     <acl name="Default">
         <right name="general.ModifyOtherObjects" access="false" />
