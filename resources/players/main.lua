@@ -742,6 +742,10 @@ function getUserID( player )
 	return player and p[ player ] and p[ player ].userID or false
 end
 
+function getUserName( player )
+	return player and p[ player ] and p[ player ].username or false
+end
+
 -- retrieves a character name from the database id
 function getCharacterName( characterID )
 	if type( characterID ) == "number" then
