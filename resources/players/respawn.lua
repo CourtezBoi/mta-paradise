@@ -15,7 +15,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 ]]
 
-local respawnDelay = tonumber( get( 'respawn_delay' ) ) or 15
+local respawnDelay = tonumber( get( 'respawn_delay' ) ) or 5
 local wastedTimes = { }
 
 addEventHandler( "onResourceStart", resourceRoot,
