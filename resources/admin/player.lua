@@ -369,7 +369,7 @@ addCommandHandler( { "staff", "admins", "mods" },
 			for key, value in ipairs( getElementsByType( "player" ) ) do
 				local groups = exports.players:getGroups( value )
 				if groups and #groups >= 1 then
-					local title = containsRank( groups, "Administrator" ) or containsRank( groups, "Moderator" )
+					local title = containsRank( groups, "Administrator" ) or containsRank( groups, "Moderator" ) or containsRank( groups, "Trial" )
 					if title then
 						local duty = exports.players:getOption( value, "staffduty" )
 						outputChatBox( "  [ID " .. exports.players:getID( value ) .. "] " .. title .. " " .. getPlayerName( value ):gsub( "_", " " ) .. ( duty and " - On Duty" or "" ), player, duty and 0 or 255, 255, duty and 153 or 255 )
