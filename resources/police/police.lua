@@ -48,7 +48,6 @@ addCommandHandler( { "policeduty", "duty" },
 		if exports.players:isLoggedIn( thePlayer ) then
 			local inPD, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 1 )
 			if inPD and factionTag then
-				local thePlayer = tonumber( thePlayer )
 				giveWeapon ( thePlayer, 24, 500, false )
 			else
 				outputChatBox( "(( You are not in a Government faction. ))", thePlayer, 255, 0, 0 )
