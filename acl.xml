@@ -17,11 +17,11 @@
     </group>
     <group name="Moderator">
         <acl name="Moderator" />
-       <object name="user.illone" />
-       <object name="user.Wesley" />
-       <object name="user.starewars" />
-       <object name="user.Najkwiin" />
-       <object name="user.obliterator789" />
+        <object name="user.illone" />
+        <object name="user.Wesley" />
+        <object name="user.starewars" />
+        <object name="user.Najkwiin" />
+        <object name="user.obliterator789" />
     </group>
     <group name="Trial">
         <acl name="Moderator" />

@@ -2,5 +2,4 @@
 	<info author="CourtezBoi" name="Randoms"	/>
 	<script src="pay.lua"/>
 	<include resource="players"/>
-	<script src="blur.lua"/>
 </meta>
