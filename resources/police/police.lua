@@ -50,11 +50,11 @@ addCommandHandler( { "policeduty", "duty" },
 			if inPD and factionTag then
 				setPlayerSkin ( thePlayer, 280 )
 				setPedArmor ( thePlayer, 100 )
-				giveWeapon ( thePlayer, 3, 1, false )
-				giveWeapon ( thePlayer, 24, 500, false )
-				giveWeapon ( thePlayer, 25, 100, false )
-				giveWeapon ( thePlayer, 29, 1500, false )
-				giveWeapon ( thePlayer, 41, 1000, false )
+				setWeaponAmmo ( thePlayer, 3, 1 )
+				setWeaponAmmo ( thePlayer, 24, 500 )
+				setWeaponAmmo ( thePlayer, 25, 100 )
+				setWeaponAmmo ( thePlayer, 29, 1500 )
+				setWeaponAmmo ( thePlayer, 41, 1000 )
 			else
 				outputChatBox( "(( You are not in a Government faction. ))", thePlayer, 255, 0, 0 )
 			end
@@ -70,12 +70,12 @@ addCommandHandler( { "swatduty", "swat" },
 			if inPD and factionTag then
 				setPlayerSkin ( thePlayer, 285 )
 				setPedArmor ( thePlayer, 100 )
-				giveWeapon ( thePlayer, 3, 1, false )
-				giveWeapon ( thePlayer, 23, 500, false )
-				giveWeapon ( thePlayer, 27, 100, false )
-				giveWeapon ( thePlayer, 29, 1500, false )
-				giveWeapon ( thePlayer, 31, 1000, false )
-				giveWeapon ( thePlayer, 34, 200, false )
+				setWeaponAmmo ( thePlayer, 3, 1 )
+				setWeaponAmmo ( thePlayer, 23, 500 )
+				setWeaponAmmo ( thePlayer, 27, 100 )
+				setWeaponAmmo ( thePlayer, 29, 1500 )
+				setWeaponAmmo ( thePlayer, 31, 1000 )
+				setWeaponAmmo ( thePlayer, 34, 200 )
 			else
 				outputChatBox( "(( You are not in a Government faction. ))", thePlayer, 255, 0, 0 )
 			end
