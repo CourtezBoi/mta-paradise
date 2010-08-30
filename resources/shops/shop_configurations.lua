@@ -73,5 +73,18 @@ shop_configurations =
 		name = "San Fierro\nElectronics",
 		skin = 217,
 		{ itemID = 7, description = "A modern, black cellphone.", price = 50 },
+	},
+		copuniform =
+	{
+		name = "San Fierro\nUniforms",
+		skin = 217,
+		{ itemID = 5, itemValue = 71, name = "Cadet Uniform", price = 0 },
+		{ itemID = 5, itemValue = 280, name = "Officer Uniform", price = 0 },
+		{ itemID = 5, itemValue = 281, name = "Sergeant Uniform", price = 0 },
+		{ itemID = 5, itemValue = 282, name = "Lieutenant Uniform", price = 0 },
+		{ itemID = 5, itemValue = 284, name = "Motorcycle Uniform", price = 0 },
+		{ itemID = 5, itemValue = 285, name = "SWAT Uniform", price = 0 },
+		{ itemID = 5, itemValue = 288, name = "Deputy Chief Uniform", price = 0 },
+		{ itemID = 5, itemValue = 283, name = "Chief Uniform", price = 0 },
 	}
 }

@@ -391,7 +391,7 @@ addCommandHandler( { "news", "n", "sr", "san" },
 -- /d for government factions
 
 addCommandHandler( { "d", "department" },
-	function( thePlayer, commandName,  )
+	function( thePlayer, commandName, ...)
 		if exports.players:isLoggedIn( thePlayer ) then
 			local inPD, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 1 )
 			local inES, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 2 )
