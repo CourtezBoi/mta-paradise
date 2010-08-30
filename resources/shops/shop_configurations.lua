@@ -74,7 +74,12 @@ shop_configurations =
 		skin = 217,
 		{ itemID = 7, description = "A modern, black cellphone.", price = 50 },
 	},
-		copuniform =
+	books =
+	{
+		name = "Book Store",
+		skin = 211,
+	},
+	copuniform =
 	{
 		name = "San Fierro\nUniforms",
 		skin = 217,
@@ -86,5 +91,30 @@ shop_configurations =
 		{ itemID = 5, itemValue = 285, name = "SWAT Uniform", price = 0 },
 		{ itemID = 5, itemValue = 288, name = "Deputy Chief Uniform", price = 0 },
 		{ itemID = 5, itemValue = 283, name = "Chief Uniform", price = 0 },
-	}
+	},
 }
+
+local function loadBookStore( )
+	for key, value in ipairs( shop_configurations.books ) do
+		shop_configurations.books[ key ] = nil
+	end
+	
+	local languages = exports.players:getLanguages( )
+	if languages then
+		for key, value in ipairs( languages ) do
+			table.insert( shop_configurations.books, { itemID = 8, itemValue = value[2], name = value[1] .. " Dictionary", description = "A dictionary to learn the basics of the " .. value[1] .. " language.", price = 100 } )
+		end
+	end
+end
+
+addEventHandler( getResources and "onResourceStart" or "onClientResourceStart", root,
+	function( res )
+		if res == resource then
+			if getResourceFromName( "players" ) and ( not getResourceState or getResourceState( getResourceFromName( "players" ) ) == "running" ) then
+				loadBookStore( )
+			end
+		elseif res == getResourceFromName( "players" ) then
+			loadBookStore( )
+		end
+	end
+)
