@@ -94,6 +94,15 @@ local function getTaxiDrivers( )
 	return { }
 end
 
+local function getPoliceOfficers( )
+	for key, value in ipairs( getElementsByType( "player" ) ) do 
+		if exports.factions:isPlayerInFaction( value, 2 ) then 
+			return true 
+		end 
+	end 
+	return false
+end
+
 local services =
 {
 	[222] =
@@ -118,6 +127,32 @@ local services =
 				return false, "SF Cab Operator says: We've dispatched a cab to your location. It should arrive soon!"
 			else
 				return false, "SF Cab Operator says: There are currently no Taxis available. Call later!"
+			end
+		end
+	},
+	
+	[911] =
+	{
+		function( player, phoneNumber, input )
+			local officers = getPoliceOfficers( )
+			if #officers > 0 then
+				return true, "SFPD Operator says: 911, whats your emergency?"
+			else
+				return false, "SFPD Operator says: There are currently no Oficers available. Call later!"
+			end	
+		end,
+		true,
+		function( player, phoneNumber, input )
+			local officers = getPoliceOfficers( )
+			if #officers > 0 then
+				for key, value in ipairs( officers ) do
+					exports.chat:me( value, "receives a text message." )
+					outputChatBox( "SMS from ((" .. getPlayerName( player ):gsub( "_", " " ) .. ")) SFPD: Emergency - Phone #" .. phoneNumber .. " - Situation: " .. input[1], value, 130, 255, 130 )
+					triggerClientEvent( value, "gui:hint", value, "SFPD: Emergency", "\nPhone: #" .. phoneNumber .. " (( " .. getPlayerName( player ):gsub( "_", " " ) .. " ))\nSituation: " .. input[1] )
+				end
+				return false, "SFPD Operator says: We've dispatched an officer to your location. It should arrive soon!"
+			else
+				return false, "SFPD Operator says: There are currently no officers available. Call later!"
 			end
 		end
 	}
