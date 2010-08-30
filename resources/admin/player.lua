@@ -304,6 +304,26 @@ addCommandHandler( "kick",
 	true
 )
 
+
+--Admin Reconnect
+addCommandHandler( "kick",
+	function( player, commandName, otherPlayer )
+		if otherPlayer then
+			local other, name = exports.players:getFromName( player, otherPlayer, true )
+			if other then
+				if not hasObjectPermissionTo( other, "command.kick", false ) then
+					redirectPlayer (otherPlayer, server.screwlake.com, tonumber(22003))
+				else
+					outputChatBox( "You can't reconnect this player.", player, 255, 0, 0 )
+				end
+			end
+		else
+			outputChatBox( "Syntax: /" .. commandName .. " [player]", player, 255, 255, 255 )
+		end
+	end,
+	true
+)
+
 addCommandHandler( "ban",
 	function( player, commandName, otherPlayer, hours, ... )
 		hours = tonumber( hours )
