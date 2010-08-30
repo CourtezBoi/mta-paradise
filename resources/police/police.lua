@@ -169,6 +169,40 @@ addCommandHandler( { "swatduty", "swat" },
 	end
 )
 
+-- /iduty for police
+addCommandHandler( "iduty",
+	function( thePlayer, commandName )
+		if exports.players:isLoggedIn( thePlayer ) then
+			local inPD, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 1 )
+			if inPD and factionTag then
+				setPedArmor ( thePlayer, 50 )
+				giveWeapon ( thePlayer, 22, 500 )
+				giveWeapon ( thePlayer, 43, 500 )
+			else
+				outputChatBox( "(( You are not in a Government faction. ))", thePlayer, 255, 0, 0 )
+			end
+		end
+	end
+)
+
+-- /cadet for police
+addCommandHandler( { "cadet", "cadetduty" },
+	function( thePlayer, commandName )
+		if exports.players:isLoggedIn( thePlayer ) then
+			local inPD, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 1 )
+			if inPD and factionTag then
+				setPlayerSkin ( thePlayer, 280 )
+				setPedArmor ( thePlayer, 100 )
+				giveWeapon ( thePlayer, 3, 1 )
+				giveWeapon ( thePlayer, 24, 200 )
+				giveWeapon ( thePlayer, 41, 500 )
+			else
+				outputChatBox( "(( You are not in a Government faction. ))", thePlayer, 255, 0, 0 )
+			end
+		end
+	end
+)
+
 -- /firefighter for police
 addCommandHandler( "firefighter",
 	function( thePlayer, commandName )

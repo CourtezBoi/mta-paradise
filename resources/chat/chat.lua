@@ -156,7 +156,7 @@ addCommandHandler( "do",
 	end
 )
 
--- /c
+-- /c 
 addCommandHandler( "c", 
 	function( thePlayer, commandName, ... )
 		if exports.players:isLoggedIn( thePlayer ) and not isPedDead( thePlayer ) then
@@ -383,6 +383,28 @@ addCommandHandler( { "news", "n", "sr", "san" },
 				end
 			else
 				outputChatBox( "(( You are not in a news faction. ))", thePlayer, 255, 0, 0 )
+			end
+		end
+	end
+)
+
+-- /d for government factions
+
+addCommandHandler( { "d", "department" },
+	function( thePlayer, commandName,  )
+		if exports.players:isLoggedIn( thePlayer ) then
+			local inPD, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 1 )
+			local inES, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 2 )
+			if inPD and factionTag or inES and factionTag then
+				local message = table.concat( { ... }, " " )
+				if #message > 0 then
+					faction ( 
+					faction( source, { 1, 2, 3 } , message )
+				else
+					outputChatBox( "Syntax: /" .. commandName .. " [radio message]", thePlayer, 255, 255, 255 )
+				end
+			else
+				outputChatBox( "(( You are not in a Government faction. ))", thePlayer, 255, 0, 0 )
 			end
 		end
 	end
