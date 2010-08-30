@@ -912,3 +912,26 @@ function setOption( player, key, value )
 	end
 	return false
 end
+
+-- Player Damage
+
+function playerDamage ( attacker, weapon, bodypart, loss )
+	if ( bodypart == 3 ) then -- Torso
+        outputChatBox ( "You've been hit in the torso", source, 255, 170, 0 )
+	elseif ( bodypart == 4 ) then -- Ass
+        outputChatBox ( "You've been hit in the ass! ", source, 255, 170, 0 )
+	elseif ( bodypart == 5 ) then -- Left Arm
+        outputChatBox ( "You've been hit in the left arm! ", source, 255, 170, 0 )
+	elseif ( bodypart == 6 ) then -- Right Arm
+        outputChatBox ( "You've been hit in the right arm! ", source, 255, 170, 0 )
+	elseif ( bodypart == 7 ) then -- Left Leg
+        outputChatBox ( "You've been hit in the left leg! ", source, 255, 170, 0 )
+	elseif ( bodypart == 8 ) then -- Right leg
+        outputChatBox ( "You've been hit in the right leg! ", source, 255, 170, 0 )
+	elseif ( bodypart == 9 ) then -- Head
+        outputChatBox ( "HEADSHOT! ", source, 255, 170, 0 )
+	else
+		outputChatBox ( "You were hit! ", source, 255, 170, 0 )
+	end
+end
+addEventHandler ( "onPlayerDamage", getRootElement (), playerDamage )
