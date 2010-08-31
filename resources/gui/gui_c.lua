@@ -491,7 +491,7 @@ bindKey( 'i', 'down',
 
 bindKey( 'F9', 'down',
 	function( )
-		if not forcedWindow then
+		if not forcedWindow and not isPedInVehicle( getLocalPlayer( ) ) then
 			if window == windows.languages then
 				hide( )
 			else

@@ -53,7 +53,7 @@ local function getPlayersInRange( from, range )
 		if getElementDimension( value ) == dimension and getElementInterior( value ) == interior then
 			local distance = getDistanceBetweenPoints3D( x, y, z, getElementPosition( value ) )
 			if distance < range then
-				t[ value ] = range
+				t[ value ] = distance
 			end
 		end
 	end
@@ -74,6 +74,18 @@ local function getPlayersInRange( from, range )
 	return t
 end
 
+-- calculate chat colors based on distance
+local function calculateColor( color, color2, distance, range )
+	return color - math.floor( ( color - color2 ) * ( distance / range ) )
+end
+
+local function calculateColors( r, r2, g, g2, b, b2, distance, range )
+	if range <= 0 then
+		range = 0.01
+	end
+	return calculateColor( r, r2, distance, range ), calculateColor( g, g2, distance, range ), calculateColor( b, b2, distance, range )
+end
+
 -- sends a ranged message
 local function localMessage( from, message, r, g, b, range, r2, g2, b2 )
 	range = range or 20
@@ -82,15 +94,21 @@ local function localMessage( from, message, r, g, b, range, r2, g2, b2 )
 	b2 = b2 or b
 	
 	for player, distance in pairs( getPlayersInRange( from, range ) ) do
-		outputChatBox( message, player, r2 + ( r - r2 ) * 1 - ( distance / range ), g2 + ( g - g2 ) * 1 - ( distance / range ), b2 + ( b - b2 ) * 1 - ( distance / range ) )
+		outputChatBox( message, player, calculateColors( r, r2, g, g2, b, b2, distance, range ) )
 	end
 end
 
 local function localizedMessage( from, prefix, message, r, g, b, range, r2, g2, b2 )
-	range = range or 20
-	r2 = r2 or r
-	g2 = g2 or g
-	b2 = b2 or b
+	if type( range ) == 'table' then
+		r2 = r
+		g2 = g
+		b2 = b
+	else
+		range = range or 20
+		r2 = r2 or r
+		g2 = g2 or g
+		b2 = b2 or b
+	end
 	
 	local language = exports.players:getCurrentLanguage( from )
 	local skill = exports.players:getLanguageSkill( from, language )
@@ -108,7 +126,11 @@ local function localizedMessage( from, prefix, message, r, g, b, range, r2, g2, 
 		end
 		prefix = " [" .. exports.players:getLanguageName( language ) .. "]" .. prefix
 		
-		for player, distance in pairs( getPlayersInRange( from, range ) ) do
+		for player, distance in pairs( type( range ) == "table" and range or getPlayersInRange( from, range ) ) do
+			if type( range ) == "table" then
+				player = distance
+				distance = 0
+			end
 			local new = message
 			if from ~= player then
 				-- check how much the player should understand
@@ -146,7 +168,7 @@ local function localizedMessage( from, prefix, message, r, g, b, range, r2, g2, 
 				end
 			end
 			
-			outputChatBox( prefix .. new, player, r2 + ( r - r2 ) * 1 - ( distance / range ), g2 + ( g - g2 ) * 1 - ( distance / range ), b2 + ( b - b2 ) * 1 - ( distance / range ) )
+			outputChatBox( prefix .. new, player, calculateColors( r, r2, g, g2, b, b2, distance, type( range ) == "table" and 1 or range ) )
 		end
 	else
 		outputChatBox( "(( Press 'L' to select a language. ))", from, 255, 0, 0 )
@@ -443,7 +465,7 @@ addCommandHandler( { "news", "n", "sr", "san" },
 			if inNews and factionTag then
 				local message = table.concat( { ... }, " " )
 				if #message > 0 then
-					outputChatBox( "[" .. tostring( factionTag ) .. "] " .. getPlayerName( thePlayer ) ..  " says: " .. message, root, 62, 184, 255 )
+					localizedMessage( thePlayer, " [" .. tostring( factionTag ) .. "] " .. getPlayerName( thePlayer ) ..  " says: ", message, 62, 184, 255, getElementsByType( "player" ) )
 				else
 					outputChatBox( "Syntax: /" .. commandName .. " [radio message]", thePlayer, 255, 255, 255 )
 				end
@@ -454,23 +476,33 @@ addCommandHandler( { "news", "n", "sr", "san" },
 	end
 )
 
--- /d for government factions
-
-addCommandHandler( { "d", "department" },
-	function( thePlayer, commandName, ...)
+-- /d for department radio
+addCommandHandler( { "department", "d", "dept" },
+	function( thePlayer, commandName, ... )
 		if exports.players:isLoggedIn( thePlayer ) then
-			local inPD, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 1 )
-			local inES, factionID, factionName, factionTag = exports.factions:isPlayerInFactionType( thePlayer, 2 )
-			if inPD and factionTag or inES and factionTag then
-				local message = table.concat( { ... }, " " )
-				if #message > 0 then
-					faction ( 
-					faction( source, { 1, 2, 3 } , message )
-				else
-					outputChatBox( "Syntax: /" .. commandName .. " [radio message]", thePlayer, 255, 255, 255 )
+			-- check if he's in PD
+			local canUseDepartmentRadio, _, _, tag = exports.factions:isPlayerInFactionType( thePlayer, 1 )
+			if not canUseDepartmentRadio then
+				-- check if he's in ES
+				canUseDepartmentRadio, _, _, tag = exports.factions:isPlayerInFactionType( thePlayer, 2 )
+				if not canUseDepartmentRadio then
+					outputChatBox( "(( You are not in a government faction. ))", thePlayer, 255, 0, 0 )
+					return
 				end
+			end
+			
+			local message = table.concat( { ... }, " " )
+			if #message > 0 then
+				local players = { }
+				for key, value in ipairs( getElementsByType( "player" ) ) do
+					-- show messages to PD, ES, SAN
+					if exports.factions:isPlayerInFactionType( value, 1 ) or exports.factions:isPlayerInFactionType( value, 2 ) or exports.factions:isPlayerInFactionType( value, 3 ) then
+						table.insert( players, value )
+					end
+				end
+				localizedMessage( thePlayer, " [DEPARTMENT] " .. getPlayerName( thePlayer ) ..  " says: ", message, 0, 0, 255, players )
 			else
-				outputChatBox( "(( You are not in a Government faction. ))", thePlayer, 255, 0, 0 )
+				outputChatBox( "Syntax: /" .. commandName .. " [radio message]", thePlayer, 255, 255, 255 )
 			end
 		end
 	end
