@@ -489,7 +489,7 @@ bindKey( 'i', 'down',
 	end
 )
 
-bindKey( 'l', 'down',
+bindKey( 'F9', 'down',
 	function( )
 		if not forcedWindow then
 			if window == windows.languages then
