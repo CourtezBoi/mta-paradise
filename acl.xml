@@ -9,25 +9,12 @@
         <acl name="Moderator" />
         <acl name="RPC" />
         <object name="resource.admin" />
-        <object name="user.mabako" />
-        <object name="user.CourtezBoi" />
-        <object name="user.illone" />
-        <object name="user.Robwiin" />
-        <object name="user.sun" />
-        <object name="user.Sirius" />
     </group>
     <group name="Moderator">
         <acl name="Moderator" />
-        <object name="user.illone" />
-        <object name="user.Wesley" />
-        <object name="user.Sirius" />
     </group>
     <group name="Trial">
         <acl name="Moderator" />
-        <object name="user.Najkwiin" />
-        <object name="user.obliterator789" />
-        <object name="user.Eusebio" />
-        <object name="user.starewars" />
     </group>
     <group name="Console">
         <acl name="Admin" />
@@ -198,6 +185,7 @@
     <acl name="Admin">
         <right name="general.ModifyOtherObjects" access="true" />
         <right name="general.http" access="true" />
+        <right name="command.superman" access="true" />
         <right name="command.start" access="true" />
         <right name="command.startall" access="true" />
         <right name="command.stop" access="true" />
