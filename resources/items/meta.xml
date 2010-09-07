@@ -138,6 +138,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 	<file src="images/ramen.png"/>
 	<file src="images/salad.png"/>
 	<file src="images/sprunk.png"/>
+	<file src="images/beer.png"/>
+	<file src="images/wine.png"/>
+	<file src="images/champagne.png"/>
+	<file src="images/martini.png"/>
+	<file src="images/vodka.png"/>
+	<file src="images/whiskey.png"/>
+	
 	
 	<include resource="sql"/>
 	<include resource="players"/>
