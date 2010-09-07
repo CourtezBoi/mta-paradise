@@ -28,10 +28,23 @@ shop_configurations =
 		{ itemID = 4, itemValue = 30, name = "Sprunk", description = "A can of this delicious Sprunk.", price = 5 },
 		{ itemID = 4, itemValue = 20, name = "Water", description = "A bottle of crystal clear mountain water.", price = 3 },
 	},
+		bar =
+	{
+		name = "The Bar",
+		skin = 217,
+		{ itemID = 4, itemValue = 30, name = "Water", price = 2 },
+		{ itemID = 4, itemValue = 10, name = "Sprunk", price = 3 },
+		{ itemID = 4, itemValue = 0, name = "Beer", price = 5 },
+		{ itemID = 4, itemValue = 5, name = "Wine", price = 8 },
+		{ itemID = 4, itemValue = -10, name = "Whiskey", price = 11 },
+		{ itemID = 4, itemValue = 0, name = "Vodka", price = 7 },
+		{ itemID = 4, itemValue = 0, name = "Martini", price = 15 },
+		{ itemID = 4, itemValue = 5, name = "Champagne", price = 20 },
+	},
 	cafe =
 	{
 		name = "Oceanside Cafe",
-		skin = 167,
+		skin = 250,
 		{ itemID = 3, itemValue = 10, name = "Pizza Combo", description = "Contains french fries, a slice of Pizza and a can of Sprunk.", price = 4 },
 		{ itemID = 3, itemValue = 30, name = "Burger Combo", description = "Contains french fries, a Fillet Burger, a Fowl Wrap and a can of Sprunk.", price = 5 },
 		{ itemID = 3, itemValue = 30, name = "Beef Combo", description = "Contains french fries, a Serloin Steak, a Fowl Wrap and a can of Sprunk.", price = 5 },
