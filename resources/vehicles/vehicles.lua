@@ -1078,3 +1078,18 @@ if setTrafficLightState and getTrafficLightState then
 		0
 	)
 end
+
+addCommandHandler( "setvehicleowner",
+	function( player, commandName, otherPlayer )
+		if exports.players:isLoggedIn( player ) and hasObjectPermissionTo( player, "command.createvehicle", false ) then
+			local vehicle = getPedOccupiedVehicle( player )
+			if vehicle and getVehicleOccupant( vehicle ) == player then
+				local data = vehicles[ vehicle ]
+				if data then
+					if data.vehicleID < 0 or exports.sql:query_free( "UPDATE vehicles SET characterID = " .. data.otherPlayer .. " WHERE vehicleID = " .. data.vehicleID ) then
+					end
+				end
+			end
+		end
+	end
+)
