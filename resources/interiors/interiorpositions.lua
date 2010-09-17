@@ -109,6 +109,7 @@ interiorPositions =
 	stadium =     { x =  -1426.14, y =   928.44, z = 1036.35, interior = 15 },
 	stadium2 =    { x =  -1426.13, y =   44.16, z = 1036.23, interior = 1 },
 	stadium3 =    { x =  -1464.72, y =   1555.93, z = 1052.68, interior = 14 },
+	hospital =    { x =  -2708.08, y =   592.96, z = -24.08, interior = 0 },
 	
 	
 	-- police departments
