@@ -40,7 +40,7 @@ local drinkMap =
 	champagne = "champagne"
 	martini = "martini"
 	vodka = "Vodka"
-	whiskey = "whiskey"
+	whiskey = "Whiskey"
 	wine = "wine"
 }
 
