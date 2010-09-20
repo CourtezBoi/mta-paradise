@@ -35,13 +35,13 @@ local foodMap =
 
 local drinkMap =
 {
-	sprunk = "sprunk"
-	beer = "beer"
-	champagne = "champagne"
-	martini = "martini"
-	vodka = "Vodka"
-	whiskey = "Whiskey"
-	wine = "wine"
+	sprunk = "sprunk",
+	beer = "beer",
+	champagne = "champagne",
+	martini = "martini",
+	vodka = "vodka",
+	whiskey = "whiskey",
+	wine = "wine",
 }
 
 --
